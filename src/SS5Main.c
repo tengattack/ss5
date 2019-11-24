@@ -217,8 +217,9 @@ UINT main(int argc, char **argv, char **envp)
      *    Start socks server in daemon mode
      */
     if( mode == LOAD_CONFIG ) {
-      if( !S5MakeDaemon() )
-        S5ServerClose(EXIT);
+      if( NOTTHREADED() )
+        if( !S5MakeDaemon() )
+          S5ServerClose(EXIT);
     }
     else {
       if( !S5LoadConfig(PARSE_CONFIG) )
